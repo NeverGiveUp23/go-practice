@@ -6,26 +6,27 @@ import (
 )
 
 func main() {
-	fmt.Println("Welcome to our booking app")
-	fmt.Println("Enter your full name")
 
-	getCustomerName("Felix", "Vargas")
+	fmt.Println("Enter Your Name: ")
+	getCustomerName()
 
 }
 
-func getCustomerName(name string, lastName string) {
-	fmt.Scan(&name, &lastName)
+func getCustomerName() {
+	var name string
+	fmt.Scanln(&name)
 	str1 := strings.ToLower(name)
-	str2 := strings.ToLower(lastName)
 
-	if str1 == "felix" && str2 == "vargas" {
-		useCustomerTicket()
+	if str1 != "" {
+		fmt.Println("Welcome to our booking app", name)
+		useCustomerTicket(name)
 	} else {
-		fmt.Println("you have no ticket")
+		fmt.Println("enter your name")
+		getCustomerName()
 	}
 }
 
-func useCustomerTicket() {
+func useCustomerTicket(name string) {
 	companyTickets := 10
 	var customerTicket int
 
@@ -34,10 +35,10 @@ func useCustomerTicket() {
 
 	if customerTicket <= 0 || customerTicket > 10 {
 		fmt.Println("Sorry, you need to enter a ticket amount above 0 and less than 10")
-		useCustomerTicket()
+		useCustomerTicket(name)
 	} else {
 		companyTicketsLeft := companyTickets - customerTicket
-		fmt.Println("You now have ", customerTicket, " and we have ", companyTicketsLeft, ".")
+		fmt.Println("You now have ", customerTicket, " tickets", name, " and we have ", companyTicketsLeft, " tickets remaining.")
 	}
 
 }
